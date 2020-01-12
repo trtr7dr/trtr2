@@ -1,0 +1,21 @@
+.contain {
+    margin: 0px 0 0 30px !important;
+}
+
+.no_pad{
+	padding: 0 !important;
+}
+
+.no_pad p{
+	padding: 5px;
+}
+
+h2{
+	text-align: left !important;
+}
+
+@media only screen and (max-width: 720px){
+	.contain {
+	    margin: 0px 0 0 0px !important;
+	}
+}

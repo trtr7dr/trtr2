@@ -1,0 +1,374 @@
+@font-face {
+    font-family: AppleIIVariant;
+    src: url('../../fonts/AppleIIVariant.ttf'); 
+}
+html { 
+    overflow-x:  hidden; 
+}
+body{
+    font-family: AppleIIVariant, sans-serif;
+    background: black;
+    overflow-x:  hidden; 
+}
+
+#demo{
+    height: 100vh; 
+    background: black;
+}
+
+#demo h1 {
+    position: absolute;
+    color: #e963fa;
+    font-size: 200px;
+    top: 45vh;
+    text-align: center;
+    width: 100%;
+    line-height: 0px;
+    mix-blend-mode: color-dodge;
+}
+
+img.trtrgif {
+    object-fit: contain;
+    text-align: center;
+    width: calc(100vw - 100px);
+    background: black;
+    max-height: 700px;
+}
+.intro {
+    background: url(/assets/trtr/trtr2/uzor/5.png);
+    padding: 50px;
+    background-repeat: round;
+}
+
+img.image_location {
+    width: 100%;
+}
+
+.image_in{
+    width: 100%;
+}
+.col-md-6.intro {
+    padding-top: 0 !important;
+}
+
+.information p {
+    top: 50px;
+    position: absolute;
+    background: #83ecf0 !important;
+    font-size: 30px;
+    padding: 5px 10px !important;
+}
+.information p{
+    background: #83ecf0;
+    padding: 5px 10px;
+    color: black !important;
+}
+.h_info {
+    margin: 50px;
+    position: absolute;
+    font-size: 35px;
+}
+.h_info p {
+    background: #83ecf0;
+    padding: 0 10px;
+    color: black;
+}
+.r_info {
+    background: #83ecf0;
+    font-size: 35px;
+    position: absolute;
+    right: 0;
+    padding: 0 10px;
+    margin: 50px;
+}
+.no_pad{
+    padding: 0;
+    background: url(/assets/trtr/trtr2/uzor/2.png);
+    background-repeat: round;
+}
+.col-md-6.location {
+    padding: 50px;
+}
+
+.r_pad{
+    padding-right: 25px !important;
+}
+.l_pad{
+    padding-left: 25px !important;
+}
+.information.r_info {
+    margin: 50px;
+    right: 0;
+}
+img.image_location {
+    background: black;
+}
+
+.black_bg{
+    background: black;
+}
+.dead{
+    background: url(/assets/trtr/trtr2/uzor/3.png);
+    background-repeat: round !important;
+}
+
+.col-md-12.chronic p {
+    font-size: 35px;
+    color: #83ecf0;
+    background: black;
+    padding: 30px;
+    margin: 0px;
+    line-height: 40px;
+    margin-bottom: 4px;
+}
+.col-md-6.chron {
+    padding: 0 !important;
+}
+
+.chronic {
+    background: url(/assets/trtr/trtr2/uzor/6.png);
+    padding: 50px;
+    background-repeat: round;
+}
+
+.information_top h2 {
+    background: #83ecf0;
+    color: white;
+    font-weight: bold;
+    margin: 0;
+    padding: 25px;
+    font-size: 35px;
+}
+.col-md-6.clear h2 {
+    background: #83ecf0;
+    font-size: 35px;
+    font-weight: 900;
+    color: black;
+    padding: 15px;
+}
+.clear{
+    padding: 0;
+}
+
+.top_zerro{
+    top: 0 !important;
+}
+.dead img{
+    max-height: 100%;
+}
+
+.person_count{
+    background: url(/assets/trtr/trtr2/uzor/1.png);
+    background-repeat: round !important;
+    padding: 50px;
+}
+table {
+    font-size: 35px;
+    width: 100%;
+}
+tr.legend{
+    color: black;
+    background: #83ecf0;
+    border-bottom: 0px;
+}
+tr{
+    color: white;
+    background: black;
+    border-bottom: 5px solid #83ecf0;
+}
+td {
+    padding: 0 25px;
+}
+@media only screen and (max-width:1010px){
+    .person_count{
+        background: none;
+        padding: 0;
+    }
+    table {
+        font-size: 20px;
+    }
+    td{
+        padding: 0;
+    }
+    .r_info {
+        margin: 0px;
+        width: 100%;
+        text-align: center;
+    }
+    .chronic, .chron{
+        padding: 0;
+    }
+    .chronic p {
+        font-size: 20px !important;
+        padding: 10px !important;
+        word-break: break-all;
+    }
+}
+@media only screen and (max-width:900px){
+    .information p {
+        font-size: 20px;
+        padding: 3px !important;
+    }
+    .location, .intro{
+        padding: 10px !important;
+    }
+}
+
+
+img.icon_char {
+    width: 30px;
+}
+
+.final {
+    font-size: 35px;
+    color: black;
+    background: #83ecf0;
+    z-index: 2000;
+    padding: 0 50px;
+    margin: 0;
+}
+
+.y_no{
+    font-weight: bold;
+    animation: yno 1s infinite linear;
+}
+
+@keyframes yno {
+    0% {
+        opacity: 1;
+    }
+    49% {
+        opacity: 1;
+    }
+    50% {
+        opacity: 0;
+    }
+    99% {
+        opacity: 0;
+    }
+}
+
+ul.pagination {
+    margin: 0;
+    display: block;
+    padding-left: 19px;
+}
+
+span.page-link, .pagination > li > a, .pagination > li > span {
+    background: #000000 !important;
+    border: 0 !important;
+    padding: 10px !important;
+    font-size: 35px;
+}
+.person {
+    display: initial;
+}
+.person img {
+    filter: invert(1);
+    width: 20px;
+    mix-blend-mode: difference;
+    padding: 5px;
+}
+.pers_cont {
+    position: absolute;
+    margin: 80px 20px;
+}
+.person:hover img {
+    transform: scale(1.5);
+}
+.inf_pers {
+    opacity: 0;
+    font-size: 20px;
+    color: white;
+    background: black;
+    padding: 10px;
+    position: absolute;
+    z-index: 2000;
+    margin-left: -36px;
+    margin-top: 40px;
+}
+.person:hover .inf_pers {
+    opacity: 1;
+}
+
+.status1{
+    filter: invert(1) hue-rotate(305deg);
+}
+.status2{
+
+    filter: hue-rotate(145deg);
+}
+.status3{
+    filter: invert(1);
+}
+.status4{
+    filter: invert(1) hue-rotate(230deg);
+}
+
+span.text_leg {
+    display: none;
+}
+
+.legend td:hover .text_leg{
+    display: contents;
+}
+
+img.icon_gend {
+    filter: invert(1);
+    width: 20px;
+}
+
+.person.dead img {
+    transform: rotate(180deg);
+}
+.monster_in img {
+    position: absolute;
+    width: 100px;
+}
+.monster_in span{
+    width: 300px;
+    position: absolute;
+    font-size: 35px;
+    color: black;
+    background: white;
+    opacity: 0;
+}
+.monster_in:hover span {
+    opacity: 1;
+}
+.monster_in{
+    position: absolute;
+}
+#meta {
+    display: none;
+}
+#castle {
+    width: calc(100vw - 100px);
+    height: 100vh;
+    background: black;
+}
+
+.bestiari p{
+    top: 0;
+    left: 50px;
+}
+.dead_list {
+    background: url(/assets/trtr/trtr2/uzor/3.png);
+    background-repeat: round !important;
+    padding: 50px;
+}
+
+.col-md-12.dead_list{
+	color: white;
+}
+.col-md-12.dead_list .legend td{
+	text-decoration: none !important;
+}
+.col-md-12.dead_list td {
+	color: #83ecf0;
+	text-decoration: line-through;
+}
+
+.black_font{
+	color: black !important;
+}
