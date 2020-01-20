@@ -33,7 +33,7 @@ class Specific_event extends Person_event {
     public static $MONSTER_FIG = 5;
     public static $N_KING = 2;
 
-    public function step($world) {
+    public function step(object $world) : void {
         if (rand(0, self::$MAX_CHANCE) === 0) {
             $this->kill_event($world);
         }
@@ -56,7 +56,7 @@ class Specific_event extends Person_event {
         $king_event->govern($world->steps, $world);
     }
 
-    public function kill_event($world) {
+    public function kill_event(object $world) : void {
         $alivers = Person::where('death', 0)->inRandomOrder()->limit(2)->get();
         if (count($alivers) === 2) {
             $killer = $alivers[0]->toArray();
@@ -76,7 +76,7 @@ class Specific_event extends Person_event {
         }
     }
 
-    public function cataclism() {
+    public function cataclism() : void {
         $deads = Person::where('death', 0)->inRandomOrder()->limit(rand(1, self::$DEAD))->get();
         $list = '| ';
         foreach ($deads as $el) {
@@ -88,7 +88,7 @@ class Specific_event extends Person_event {
         News_event::news_create(self::$CATA_CODE, $list);
     }
 
-    public function growth() {
+    public function growth() : void {
 	    $list = '| ';
         for ($i = 0; $i < rand(1, self::$DEAD); $i++) {
             $el = $this->new_person();
@@ -98,7 +98,7 @@ class Specific_event extends Person_event {
         News_event::news_create(self::$GRO_CODE, $list);
     }
 
-    public function status($w) {
+    public function status(object $w) : void {
         if ($w->status === 1) {
             $w->status = rand(2, self::$MAX_STATUS);
             $stat = Status::get_status();
@@ -127,7 +127,7 @@ class Specific_event extends Person_event {
         $w->save();
     }
 
-    public function mor_do() {
+    public function mor_do() : void {
         $deads = Person::where('death', 0)->inRandomOrder()->limit(rand(0, self::$DEAD))->get();
         foreach ($deads as $el) {
             $el->life -= rand(1, self::$DAMEGE / 3);
@@ -135,7 +135,7 @@ class Specific_event extends Person_event {
         }
     }
 
-    public function graz_do() {
+    public function graz_do() : void {
         $deads = Person::where('death', 0)->inRandomOrder()->limit(rand(0, self::$DEAD))->get();
         foreach ($deads as $el) {
             $el->life += rand(1, self::$DAMEGE / 3);
@@ -143,7 +143,7 @@ class Specific_event extends Person_event {
         }
     }
 
-    public function war_do() {
+    public function war_do() : void {
         $deads = Person::where('death', 0)->where('old', '>', 14)->inRandomOrder()->limit(rand(0, self::$DEAD / 2))->get();
         foreach ($deads as $el) {
             $el->death = 1;
@@ -151,13 +151,13 @@ class Specific_event extends Person_event {
         }
     }
 
-    public function eco_do() {
+    public function eco_do() : void {
         for ($i = 0; $i < rand(1, self::$DEAD / 2); $i++) {
             $this->new_person();
         }
     }
 
-    public function god_event() {
+    public function god_event() : void {
         $god = Sacri::get_rand_god();
 
         if (rand(0, 1) === 1) {
@@ -180,7 +180,7 @@ class Specific_event extends Person_event {
         }
     }
 
-    public function monster_add() {
+    public function monster_add() : void {
         $p = Person::where('death', 0)->inRandomOrder()->first();
         $p->type = 3;
         $p->death = 1;

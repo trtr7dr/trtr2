@@ -20,8 +20,8 @@ class King_event extends Specific_event {
     public static $N_KING_KILLER = 4; 
     public static $N_KILLED_KING = 5; 
 
-    public function govern($steps, $w) {
-        if (is_null($this->king_check()) || $steps % 100 === 0) { //нет короля!
+    public function govern(int $steps, object $w) : void {
+        if (is_null($this->get_actual_king()) || $steps % 100 === 0) { //нет короля!
             if ($steps % 100 === 0) {
                 $k = $this->new_king();
                 $this->rand_event($k, $w);
@@ -36,12 +36,12 @@ class King_event extends Specific_event {
         }
     }
 
-    public function king_check() {
+    public function get_actual_king() {
         return Person::where('king', 1)->where('death', 0)->first();
-        
+      
     }
 
-    public function new_king() {
+    public function new_king() : array {
         $old = Person::where('king', 1)->get();
         foreach ($old as $el) {
             $el->king = 0;
@@ -64,7 +64,7 @@ class King_event extends Specific_event {
         return $new_king->toArray();
     }
 
-    public function rand_event($k, $w) {
+    public function rand_event(array $k, object $w) {
         News_event::news_create(self::$NEW_KING_CODE, $k['name_obj']['name']);
         if (rand(0, self::$RAND_STAT) === 0) {
             News_event::news_create(self::$REL_CODE);
@@ -72,7 +72,7 @@ class King_event extends Specific_event {
         }
     }
 
-    public function axe_person() {
+    public function axe_person() : void {
         $aliver = Person::where('death', 0)->inRandomOrder()->first();
         if (!is_null($aliver)) {
             $aliver->death = 1;
@@ -82,7 +82,7 @@ class King_event extends Specific_event {
         }
     }
 
-    public function heir() {
+    public function heir() : void {
         $aliver = Person::where('death', 0)->where('king', '!=', 1)->inRandomOrder()->first();
         if (!is_null($aliver)) {
             $aliver->nick_name_id = 1;
@@ -93,7 +93,7 @@ class King_event extends Specific_event {
         }
     }
 
-    public static function regicide($new_king, $old, $w) {
+    public static function regicide(object $new_king, object $old, object $w) : void {
         $new_king->nick_name_id = self::$N_KING_KILLER;
         $new_king->save();
         $old->nick_name_id = self::$N_KING_KILLER;

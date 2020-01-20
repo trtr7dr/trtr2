@@ -26,7 +26,7 @@ class World_event {
         $this->CURRENT_WORLD = World::orderBy('id', 'DESC')->first();
     }
 
-    public function new_world() { //создать новый мир
+    public function new_world() : object{ //создать новый мир
         Person::truncate();
         Position::truncate();
         Monster::truncate();
@@ -44,7 +44,7 @@ class World_event {
         $this->CURRENT_WORLD = World::orderBy('id', 'DESC')->first();
     }
 
-    public function step() {
+    public function step() : void{
         $this->CURRENT_WORLD->steps += 1;
         $person_class = new Person_event();
         $data = Position::where('location', '!=', 0)->get()->toArray();
@@ -65,7 +65,7 @@ class World_event {
         $this->CURRENT_WORLD->save();
     }
 
-    public function end_check() { //проверка на конец мира 
+    public function end_check() : void { //проверка на конец мира 
         $alive = Person::where('death', 0)->count();
 
         if ($alive > self::$MAX_LIVE_PERSON) {
@@ -86,7 +86,7 @@ class World_event {
         }
     }
 
-    public function empty_body() { //сожжение лишних трупов
+    public function empty_body() : void{ //сожжение лишних трупов
         $dead = Person::where('death', 1)->count();
 
         if ($dead > self::$MAX_LIVE_PERSON) {

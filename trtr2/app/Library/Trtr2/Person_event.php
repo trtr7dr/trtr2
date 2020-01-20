@@ -22,7 +22,11 @@ class Person_event {
     public static $DEAD_CODE = 3;
     public static $NEW_CODE = 4;
 
-    public function new_person($mather = null, $father = null, $temper = null, $sub_name_id = null) {
+    public function new_person( 
+            object $mather = null, 
+            object $father = null, 
+            object $temper = null, object 
+            $sub_name_id = null) : object {
         $model = new Person();
         $model->mather_id = $mather;
         $model->father_id = $father;
@@ -46,16 +50,17 @@ class Person_event {
         return $model;
     }
 
-    public function do_changes($elem) {
-        if ($elem['person_obj']['death'] === 1)
-            return 0;
-
+    public function do_changes(array $elem) : bool {
+        if ($elem['person_obj']['death'] === 1){
+            return false;
+        }
         $this->changes_in_person($elem);
         $this->changes_position($elem['person_obj']);
         $this->dead_time();
+        return true;
     }
 
-    public function changes_in_person($el) {
+    public function changes_in_person(array $el) : void{
         $person_obj = $el['person_obj'];
         $person_model = Person::find($person_obj['id']); //поскольку $el содержит все связи для персонажа, создаем новую модель для обновления
 
@@ -86,7 +91,7 @@ class Person_event {
         $person_model->save();
     }
 
-    public function new_child($parent) {
+    public function new_child(array $parent) : void {
 	    
         $per2 = Person::get_parent($parent); //возможный родитель
      
@@ -99,7 +104,7 @@ class Person_event {
         }
     }
 
-    public function get_sub($per1, $p2) { //фамилия, постродовое состояние, число детей
+    public function get_sub(array $per1, object $p2) : string { //фамилия, постродовое состояние, число детей
         $p1 = Person::find($per1['id']);
         $p1->child = $p1->child + 1;
         $p2->child = $p2->child + 1;
@@ -128,7 +133,7 @@ class Person_event {
         return $res;
     }
 
-    public function changes_position($person_obj) {
+    public function changes_position(array $person_obj) : int {
         $position_model = Position::where('person', $person_obj['id'])->first();
         $new_location = $this->test_person($person_obj);
         $position_model->location = $new_location;
@@ -136,28 +141,26 @@ class Person_event {
         return $new_location;
     }
 
-    public function test_person($obj) {
-
-
-        if (rand(1, 100) > $obj['temper']) {
+    public function test_person(array $per) : int{
+        if (rand(1, 100) > $per['temper']) {
             return rand(1, 4);
         }
 
-        if ($obj['life'] < self::$LIM_LIFE || $obj['powerless'] > self::$LIM_MAX + $obj['temper']) {
+        if ($per['life'] < self::$LIM_LIFE || $per['powerless'] > self::$LIM_MAX + $per['temper']) {
             return self::$SAD;
         }
 
-        if ($obj['cash'] < self::$LIM_LIFE || (rand(1, 100) + $obj['temper']) < self::$LIM_MAX || $obj['powerless'] < 0) {
+        if ($per['cash'] < self::$LIM_LIFE || (rand(1, 100) + $per['temper']) < self::$LIM_MAX || $per['powerless'] < 0) {
             return self::$WORK;
         }
 
-        if ($obj['cash'] > self::$LIM_MAX || $obj['life'] > self::$LIM_MAX) {
+        if ($per['cash'] > self::$LIM_MAX || $per['life'] > self::$LIM_MAX) {
             return self::$HOME;
         }
         return rand(1, 4);
     }
 
-    public function dead_time() {
+    public function dead_time() : void {
         $dyings = Person::dying(rand(0, self::$RAND));
         foreach ($dyings as $el) {
             if (rand(0, self::$RAND) === 1 || rand(self::$LIM_MAX, self::$LIM_MAX * 2) < $el->old || $el->life <= 0) {
@@ -172,12 +175,12 @@ class Person_event {
         }
     }
 
-    public function kill($elem) {
+    public function kill(object $elem) : void {
         $elem->death = 1;
         $elem->save();
     }
 
-    public function set_pos_by_person($id) {
+    public function set_pos_by_person(int $id) : void {
         $p = Position::where('person', $id)->first();
         $p->location = 4;
         $p->save();
