@@ -9,13 +9,13 @@
         public static $max_location = 4; //локкаций
 
 
-        public static function add_rand_position($id){ //случайная позиция для персонажа по айди
+        public static function add_rand_position(int $id) : void { //случайная позиция для персонажа по айди
             $position_model = new Position();
             $position_model->person = $id;
             $position_model->location = rand(1, self::$max_location);
             $position_model->save();
         }
-        public static function delet_by_per($per){
+        public static function delet_by_per(int $per) : void {
             $del = Position::where('person', $per)->first();
             $del->delete();
         }
